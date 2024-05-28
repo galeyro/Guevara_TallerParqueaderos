@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Esta clase representa un parqueadero con TAMANO puestos.
  */
@@ -347,7 +349,7 @@ public class Parqueadero {
     }
 
     public boolean hayCarroMasDeOchoHoras() {
-        int hora_salida = 20;
+        int hora_salida = 8;
         boolean ocho_horas = false;
         for (int i = 0; i < puestos.length; i++) {
             var puesto = puestos[i];
@@ -360,4 +362,23 @@ public class Parqueadero {
         return ocho_horas;
     }
 
+    public ArrayList<Carro> darCarrosMasDeTresHorasParqueados() {
+        ArrayList<Carro> lista_temp = new ArrayList<>();
+        int hora_salida = 8;
+        for (int i = 0; i < puestos.length; i++) {
+            var puesto = puestos[i];
+            if (puesto.estaOcupado()) {
+                if (puesto.darCarro().darTiempoEnParqueadero(hora_salida) > 3) {
+                    lista_temp.add(puesto.darCarro());
+                }
+            }
+        }
+        return lista_temp;
+    }
+
+    public void mostrarLista(ArrayList<Carro> list) {
+        for (Carro carro:list){
+            System.out.println(carro.darPlaca());
+        }
+    }
 }
