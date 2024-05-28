@@ -3,7 +3,14 @@
  */
 public class Parqueadero {
 // -----------------------------------------------------------------
-    // Constantes
+    // Constantes y atributos
+    private int tarifa;
+    private int caja;
+    private int horaActual;
+    private boolean abierto;
+
+    public int TAMAÑO;
+
     // -----------------------------------------------------------------
 
     /**
