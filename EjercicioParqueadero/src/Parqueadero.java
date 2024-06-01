@@ -377,8 +377,68 @@ public class Parqueadero {
     }
 
     public void mostrarLista(ArrayList<Carro> list) {
-        for (Carro carro:list){
+        for (Carro carro : list) {
             System.out.println(carro.darPlaca());
         }
+    }
+
+    public boolean hayCarrosPlacaIgual() {
+
+        Carro carro_temp = new Carro("", 0);
+
+        for (int i = 0; i < puestos.length; i++) {
+
+            var puesto = puestos[i];
+
+            if (puesto.estaOcupado()) {
+                carro_temp = puesto.darCarro();
+
+                for (int j = 0; j < puestos.length; j++) {
+                    var puesto_comp = puestos[j];
+
+                    if (puesto_comp.estaOcupado()) {
+
+                        //System.out.println("carro "+ i+" " + carro_temp.darPlaca() + " carro "+j+" "+puesto_comp.darCarro().darPlaca());
+                        if (!carro_temp.darPlaca().substring(0, 7).equals(puesto_comp.darCarro().darPlaca().substring(0, 7))) {
+                            if (carro_temp.darPlaca().substring(0, 2).equals(puesto_comp.darCarro().darPlaca().substring(0, 2))) {
+                                //System.out.println(carro_temp.darPlaca().substring(0, 2)+" "+puesto_comp.darCarro().darPlaca().substring(0, 2));
+                                //System.out.println("true");
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public void contarCarrosQueComienzanConPlacaPB() {
+        int contador = 0;
+
+        for (int i = 0; i < puestos.length; i++) {
+            var puesto = puestos[i];
+            if (puesto.estaOcupado()) {
+                if (puesto.darCarro().darPlaca().startsWith("PB")) {
+                    contador += 1;
+                }
+            }
+
+        }
+        System.out.println("Cantidad de carros con placa PB son: " + contador);
+    }
+
+    public boolean hayCarroCon24Horas() {
+        for (int i = 0; i < puestos.length; i++) {
+            var puesto = puestos[i];
+
+            if (puesto.estaOcupado()) {
+                int hora_total = puesto.darCarro().darTiempoEnParqueadero(30) - 1;
+                if (hora_total >= 24) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

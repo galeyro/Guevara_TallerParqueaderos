@@ -3,6 +3,8 @@ Nombre: Galo Guevara
 Deber: S9 Taller de arreglos , colecciones y diseño avanzado de clases
 Descripcion: realizar el taller a partir del repositorio: https://github.com/BERNYSAN77/EjercicioParqueadero.git
  */
+import com.sun.security.jgss.GSSUtil;
+
 import java.util.ArrayList;
 
 public class Main {
@@ -13,6 +15,7 @@ public class Main {
 
         parqueadero.entrarCarro("PPP-001");
         parqueadero.entrarCarro("PAA-002");
+        parqueadero.entrarCarro("PBA-234");
 
         System.out.println("Puestos libres: "+parqueadero.calcularPuestosLibres());
         System.out.println("Promedio horas: "+parqueadero.darTiempoPromedio());
@@ -26,6 +29,12 @@ public class Main {
         } else {
             System.out.println("No hay carros con más de 3 horas parqueado");
         }
+
+        System.out.println("Hay carros con placas iguales es: "+ parqueadero.hayCarrosPlacaIgual());
+        //parqueadero.hayCarrosPlacaIgual();
+
+        parqueadero.contarCarrosQueComienzanConPlacaPB();
+        System.out.println("Hay carros con más de 24 horas: "+ parqueadero.hayCarroCon24Horas());
     }
 
 }
