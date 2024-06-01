@@ -35,6 +35,8 @@ public class Main {
 
         parqueadero.contarCarrosQueComienzanConPlacaPB();
         System.out.println("Hay carros con más de 24 horas: "+ parqueadero.hayCarroCon24Horas());
+
+        parqueadero.desocuparParqueadero();
     }
 
 }

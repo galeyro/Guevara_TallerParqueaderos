@@ -413,21 +413,6 @@ public class Parqueadero {
         return false;
     }
 
-    public void contarCarrosQueComienzanConPlacaPB() {
-        int contador = 0;
-
-        for (int i = 0; i < puestos.length; i++) {
-            var puesto = puestos[i];
-            if (puesto.estaOcupado()) {
-                if (puesto.darCarro().darPlaca().startsWith("PB")) {
-                    contador += 1;
-                }
-            }
-
-        }
-        System.out.println("Cantidad de carros con placa PB son: " + contador);
-    }
-
     public boolean hayCarroCon24Horas() {
         for (int i = 0; i < puestos.length; i++) {
             var puesto = puestos[i];
@@ -440,5 +425,42 @@ public class Parqueadero {
             }
         }
         return false;
+    }
+
+    public void contarCarrosQueComienzanConPlacaPB() {
+        int contador = 0;
+        boolean parqueadoMas24Horas = false;
+        String respuesta;
+
+        for (int i = 0; i < puestos.length; i++) {
+            var puesto = puestos[i];
+            if (puesto.estaOcupado()) {
+                if (puesto.darCarro().darPlaca().startsWith("PB")) {
+                    contador += 1;
+                    if (hayCarroCon24Horas()) {
+                        parqueadoMas24Horas = true;
+                    }
+                }
+            }
+        }
+        if (parqueadoMas24Horas) {
+            respuesta = "SI";
+        } else {
+            respuesta = "NO";
+        }
+
+        System.out.println("Cantidad de carros con placa PB son: " + contador + " - Hay carro con más de 24 horas parqueador: " + respuesta);
+    }
+
+    public void desocuparParqueadero() {
+        int cont = 0;
+        for (int i = 0; i < puestos.length; i++) {
+            var puesto = puestos[i];
+            if (puesto.estaOcupado()) {
+                cont++;
+                puesto.sacarCarro();
+            }
+        }
+        System.out.println("Cantidad de carros sacados: " +cont);
     }
 }
